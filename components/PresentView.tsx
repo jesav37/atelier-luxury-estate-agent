@@ -32,7 +32,7 @@ export default function PresentView() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto py-12 px-6 space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="p-6 md:p-12 lg:p-16 lg:pt-12 space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Header / Brand */}
       <div className="text-center space-y-4">
         <div className="inline-block px-3 py-1 border border-[var(--brass)] text-[10px] tracking-[0.2em] uppercase text-[var(--brass)] mb-4">

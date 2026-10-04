@@ -68,7 +68,7 @@ export default function AssetsView() {
   }
 
   return (
-    <div className="px-5 py-7 sm:px-8 sm:py-10 md:px-12 md:py-12 lg:px-16">
+    <div className="p-6 md:p-12 lg:p-16 lg:pt-12">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <div className="eyebrow">Assets · {production.assets.length} items</div>

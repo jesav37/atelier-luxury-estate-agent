@@ -60,9 +60,9 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-ink text-bone antialiased font-sans">
+    <div className="flex min-h-screen bg-ink text-bone antialiased font-sans">
       <Sidebar view={view} onChangeView={setView} />
-      <main className="md:pl-[236px]" data-view={view}>
+      <main className="flex-1 md:pl-[236px]" data-view={view}>
         <div className="mx-auto w-full max-w-[1280px]">
           <ViewHost
             view={view}

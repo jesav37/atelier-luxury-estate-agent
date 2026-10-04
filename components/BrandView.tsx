@@ -26,7 +26,7 @@ export default function BrandView() {
   };
 
   return (
-    <div className="px-5 py-7 sm:px-8 sm:py-10 md:px-12 md:py-12 lg:px-16">
+    <div className="p-6 md:p-12 lg:p-16 lg:pt-12">
       <div className="eyebrow">Brand Kit</div>
       <h1 className="view-title">The brokerage identity.</h1>
       <p className="view-sub">
