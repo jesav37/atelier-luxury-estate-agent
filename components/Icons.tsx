@@ -135,6 +135,164 @@ export const ShareIcon = (p: IconProps) =>
     p
   );
 
+export const TrendingUpIcon = (p: IconProps) =>
+  svg(
+    <>
+      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+      <polyline points="16 7 22 7 22 13" />
+    </>,
+    p
+  );
+
+export const UsersIcon = (p: IconProps) =>
+  svg(
+    <>
+      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    </>,
+    p
+  );
+
+export const MousePointerClickIcon = (p: IconProps) =>
+  svg(
+    <>
+      <path d="M14 4.1 12 6" />
+      <path d="m5.1 8-2.9-.8" />
+      <path d="m6 12-1.9 2" />
+      <path d="M7.2 2.2 8 5.1" />
+      <path d="M9.037 9.69a.498.498 0 0 1 .653-.653l11 4.5a.5.5 0 0 1-.074.949l-4.349 1.033a.5.5 0 0 0-.34.34l-1.033 4.352a.5.5 0 0 1-.949.074l-4.5-11Z" />
+    </>,
+    p
+  );
+
+export const BarChart3Icon = (p: IconProps) =>
+  svg(
+    <>
+      <path d="M3 3v18h18" />
+      <path d="M18 17V9" />
+      <path d="M13 17V5" />
+      <path d="M8 17v-3" />
+    </>,
+    p
+  );
+
+export const ZapIcon = (p: IconProps) =>
+  svg(<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />, p);
+
+export const ShieldIcon = (p: IconProps) =>
+  svg(<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />, p);
+
+export const EyeIcon = (p: IconProps) =>
+  svg(
+    <>
+      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+      <circle cx="12" cy="12" r="3" />
+    </>,
+    p
+  );
+
+export const CopyIcon = (p: IconProps) =>
+  svg(
+    <>
+      <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+    </>,
+    p
+  );
+
+export const SearchIcon = (p: IconProps) =>
+  svg(
+    <>
+      <circle cx="11" cy="11" r="8" />
+      <path d="m21 21-4.3-4.3" />
+    </>,
+    p
+  );
+
+export const MailIcon = (p: IconProps) =>
+  svg(
+    <>
+      <rect width="20" height="16" x="2" y="4" rx="2" />
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    </>,
+    p
+  );
+
+export const CalendarIcon = (p: IconProps) =>
+  svg(
+    <>
+      <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+      <line x1="16" x2="16" y1="2" y2="6" />
+      <line x1="8" x2="8" y1="2" y2="6" />
+      <line x1="3" x2="21" y1="10" y2="10" />
+    </>,
+    p
+  );
+
+export const CheckCircle2Icon = (p: IconProps) =>
+  svg(
+    <>
+      <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+      <path d="m9 12 2 2 4-4" />
+    </> ,
+    p
+  );
+
+export const AlertCircleIcon = (p: IconProps) =>
+  svg(
+    <>
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="8" x2="12" y2="12" />
+      <line x1="12" y1="16" x2="12.01" y2="16" />
+    </>,
+    p
+  );
+
+export const MoreVerticalIcon = (p: IconProps) =>
+  svg(
+    <>
+      <circle cx="12" cy="12" r="1" />
+      <circle cx="12" cy="5" r="1" />
+      <circle cx="12" cy="19" r="1" />
+    </>,
+    p
+  );
+
+export const Loader2Icon = (p: IconProps) =>
+  svg(
+    <>
+      <path d="M12 2v4" />
+      <path d="m16.2 7.8 2.9-2.9" />
+      <path d="M18 12h4" />
+      <path d="m16.2 16.2 2.9 2.9" />
+      <path d="M12 18v4" />
+      <path d="m4.9 19.1 2.9-2.9" />
+      <path d="M2 12h4" />
+      <path d="m4.9 4.9 2.9 2.9" />
+    </>,
+    p
+  );
+
+export const ImageIcon = (p: IconProps) =>
+  svg(
+    <>
+      <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+      <circle cx="9" cy="9" r="2" />
+      <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+    </>,
+    p
+  );
+
+export const MessageSquareIcon = (p: IconProps) =>
+  svg(
+    <>
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </>,
+    p
+  );
+
 export const FileTextIcon = (p: IconProps) =>
   svg(
     <>

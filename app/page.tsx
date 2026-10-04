@@ -9,6 +9,9 @@ import FlowView from "@/components/FlowView";
 import AssetsView from "@/components/AssetsView";
 import BrandView from "@/components/BrandView";
 import PresentView from "@/components/PresentView";
+import MarketingAdminView from "@/components/admin/MarketingAdminView";
+import ProspectingAgentView from "@/components/admin/ProspectingAgentView";
+import AssetLibraryView from "@/components/admin/AssetLibraryView";
 
 function ViewHost({
   view,
@@ -32,6 +35,12 @@ function ViewHost({
       return <BrandView />;
     case "present":
       return <PresentView />;
+    case "marketing":
+      return <MarketingAdminView />;
+    case "prospecting":
+      return <ProspectingAgentView />;
+    case "library":
+      return <AssetLibraryView />;
     default:
       return null;
   }

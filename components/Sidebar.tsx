@@ -13,13 +13,23 @@ import {
   PresentIcon,
 } from "./Icons";
 
-export type ViewKey = "compose" | "board" | "flow" | "assets" | "brand" | "present";
+export type ViewKey =
+  | "compose"
+  | "board"
+  | "flow"
+  | "assets"
+  | "brand"
+  | "present"
+  | "marketing"
+  | "prospecting"
+  | "library";
 
 export const VIEWS: {
   key: ViewKey;
   label: string;
   hint: string;
   Icon: React.FC<{ className?: string; size?: number }>;
+  admin?: boolean;
 }[] = [
   { key: "compose", label: "Compose", hint: "Author the brief", Icon: ComposeIcon },
   { key: "board", label: "Greenlight", hint: "Approve each scene", Icon: BoardIcon },
@@ -27,6 +37,9 @@ export const VIEWS: {
   { key: "assets", label: "Assets", hint: "Rendered artefacts", Icon: AssetsIcon },
   { key: "brand", label: "Brand Kit", hint: "Brokerage identity", Icon: BrandIcon },
   { key: "present", label: "Present", hint: "Client delivery", Icon: PresentIcon },
+  { key: "marketing", label: "Admin: Pitch", hint: "Marketing engine", Icon: TrendingUpIcon, admin: true },
+  { key: "prospecting", label: "Admin: Agent", hint: "Lead gen engine", Icon: ZapIcon, admin: true },
+  { key: "library", label: "Admin: Library", hint: "Creative assets", Icon: FilmIcon, admin: true },
 ];
 
 interface SidebarProps {
@@ -46,12 +59,15 @@ export default function Sidebar({ view, onChangeView }: SidebarProps) {
     flow: storyboarded ? "live" : null,
     assets: assetCount > 0 ? String(assetCount) : null,
     brand: state.production.brand ? "saved" : null,
-    present: state.production.assets.some(a => a.kind === "cut") ? "ready" : null,
+    present: state.production.assets.some((a) => a.kind === "cut") ? "ready" : null,
+    marketing: "auto",
+    prospecting: "agent active",
+    library: "10+",
   };
 
   const desktopNav = (
-    <nav className="flex flex-col gap-1">
-      {VIEWS.map(({ key, label, hint, Icon }) => {
+    <nav className="flex flex-col gap-1 overflow-y-auto max-h-[60vh] pr-2 custom-scrollbar">
+      {VIEWS.map(({ key, label, hint, Icon, admin }) => {
         const active = view === key;
         const badge = badgeFor[key];
         return (
@@ -60,6 +76,7 @@ export default function Sidebar({ view, onChangeView }: SidebarProps) {
             onClick={() => onChangeView(key)}
             className={[
               "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all",
+              admin && !active ? "opacity-70 grayscale hover:opacity-100 hover:grayscale-0" : "",
               active
                 ? "bg-[rgba(184,155,114,0.10)] text-[var(--bone)]"
                 : "text-[var(--muted)] hover:text-[var(--bone)] hover:bg-[rgba(245,242,236,0.04)]",
