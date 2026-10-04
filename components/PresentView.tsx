@@ -1,20 +1,19 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { useProduction } from "@/lib/store";
 import {
   DownloadIcon,
-  FilmIcon,
-  FileTextIcon,
-  ShareIcon,
   CheckCircleIcon,
+  ShareIcon,
 } from "@/components/Icons";
 import { AssetItem } from "@/lib/types";
 
 export default function PresentView() {
   const { state, actions } = useProduction();
   const { production } = state;
-  const { assets, storyboard, propertyDetails, agent, brand } = production;
+  const { assets, storyboard, propertyDetails, agent, brand, id: productionId } = production;
+  const [shared, setShared] = useState<"link" | "blocked" | null>(null);
 
   const cutAsset = useMemo(() => assets.find((a) => a.kind === "cut" && a.payload.mime === "image/svg+xml"), [assets]);
   const captionAsset = useMemo(() => assets.find((a) => a.kind === "caption"), [assets]);
@@ -44,6 +43,37 @@ export default function PresentView() {
         <p className="text-[var(--muted)] tracking-widest uppercase text-xs">
           Prepared by {agent?.name || "Atelier Agent"} · {agent?.brokerage || "Atelier Estates"}
         </p>
+        <div className="flex items-center justify-center gap-3 pt-2">
+          <button
+            type="button"
+            onClick={async () => {
+              const link =
+                typeof window === "undefined"
+                  ? ""
+                  : `${window.location.origin}/present/${productionId}`;
+              let ok = false;
+              try {
+                await navigator.clipboard.writeText(link);
+                ok = true;
+              } catch {
+                ok = false;
+              }
+              actions.logEvent("delivery_shared", {
+                source: "operator",
+                detail: "Present link copied",
+              });
+              setShared(ok ? "link" : "blocked");
+              window.setTimeout(() => setShared(null), 2600);
+            }}
+            className="ghost-btn"
+          >
+            <ShareIcon size={14} />
+            {shared === "link" ? "Delivery link copied" : "Copy client link"}
+          </button>
+          <span className="text-[10px] uppercase tracking-[0.2em] text-[var(--muted)]">
+            {shared === "blocked" ? "Clipboard blocked — copy the URL manually" : "Ad-free, editorial layout"}
+          </span>
+        </div>
       </div>
 
       {/* Hero / Cut */}
@@ -66,7 +96,10 @@ export default function PresentView() {
         
         {cutAsset && (
           <button 
-            onClick={() => actions.downloadAsset(cutAsset)}
+            onClick={() => {
+              actions.downloadAsset(cutAsset);
+              actions.logEvent("delivery_shared", { source: "prospect", detail: "Final Cut downloaded" });
+            }}
             className="absolute bottom-6 right-6 p-4 bg-[var(--ink)] border border-[var(--brass)]/40 text-[var(--brass)] hover:bg-[var(--brass)] hover:text-[var(--ink)] transition-all shadow-2xl"
           >
             <DownloadIcon size={20} />
@@ -125,6 +158,7 @@ export default function PresentView() {
                 <button 
                   onClick={() => {
                     navigator.clipboard.writeText(captionAsset.payload.content);
+                    actions.logEvent("pitch_copied", { source: "prospect", detail: "Social caption copied" });
                   }}
                   className="text-[10px] uppercase tracking-widest text-[var(--brass)] hover:text-[var(--bone)]"
                 >

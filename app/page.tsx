@@ -17,10 +17,12 @@ function ViewHost({
   view,
   onPlanned,
   onOpenCompose,
+  onNavigate,
 }: {
   view: ViewKey;
   onPlanned: () => void;
   onOpenCompose: () => void;
+  onNavigate: (view: ViewKey) => void;
 }) {
   switch (view) {
     case "compose":
@@ -36,7 +38,7 @@ function ViewHost({
     case "present":
       return <PresentView />;
     case "marketing":
-      return <MarketingAdminView />;
+      return <MarketingAdminView onNavigate={onNavigate} />;
     case "prospecting":
       return <ProspectingAgentView />;
     case "library":
@@ -48,7 +50,7 @@ function ViewHost({
 
 export default function App() {
   const [view, setView] = useState<ViewKey>("compose");
-  const { state } = useProduction();
+  const { state, actions } = useProduction();
 
   // Whenever a storyboard first appears, jump the user to the board.
   useEffect(() => {
@@ -56,6 +58,15 @@ export default function App() {
       setView("board");
     }
   }, [state.production.storyboard, state.planning, view]);
+
+  // Real surface telemetry for the marketing desk: one event per tab opened,
+  // recorded only after the store has hydrated so reloads are not double-counted
+  // into an empty ledger.
+  const logEvent = actions.logEvent;
+  useEffect(() => {
+    if (!state.hydrated) return;
+    logEvent("view_opened", { source: "operator", detail: view });
+  }, [view, state.hydrated, logEvent]);
 
   if (!state.hydrated) {
     return (
@@ -77,6 +88,7 @@ export default function App() {
             view={view}
             onPlanned={() => setView("board")}
             onOpenCompose={() => setView("compose")}
+            onNavigate={setView}
           />
         </div>
       </main>

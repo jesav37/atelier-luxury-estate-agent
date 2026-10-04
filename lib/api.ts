@@ -66,6 +66,7 @@ export function emptyProduction(): Production {
     photoNames: [],
     assets: [],
     creditsSpent: 0,
+    marketing: { events: [] },
   };
 }
 

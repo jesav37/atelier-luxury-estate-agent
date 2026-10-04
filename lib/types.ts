@@ -142,6 +142,36 @@ export interface BrandKit {
   readAt: number;
 }
 
+/**
+ * One recorded funnel event. The ledger lives in this browser only — there is
+ * no third-party analytics connection in this prototype. See lib/marketing.ts
+ * for how events are counted and derived into metrics.
+ */
+export type MarketingEventType =
+  | "view_opened"
+  | "pitch_copied"
+  | "delivery_shared"
+  | "outreach_sent"
+  | "demo_requested"
+  | "onboarded";
+
+/** Who caused the event. "simulated-agent" events are never counted as real. */
+export type MarketingSource = "operator" | "prospect" | "simulated-agent";
+
+export interface MarketingEvent {
+  id: string;
+  type: MarketingEventType;
+  /** Epoch ms. */
+  at: number;
+  source: MarketingSource;
+  /** Free-text context: the surface opened, the pitch asset handed over, a lead name. */
+  detail?: string;
+}
+
+export interface MarketingLedger {
+  events: MarketingEvent[];
+}
+
 export interface Production {
   id: string;
   createdAt: number;
@@ -156,4 +186,6 @@ export interface Production {
   creditsSpent: number;
   brand?: BrandKit;
   agent?: AgentProfile;
+  /** Locally recorded funnel events powering the Marketing dashboard. */
+  marketing?: MarketingLedger;
 }

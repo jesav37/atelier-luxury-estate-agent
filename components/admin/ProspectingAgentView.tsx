@@ -22,7 +22,10 @@ type Lead = {
   lastAction: string;
 };
 
+import { useProduction } from "@/lib/store";
+
 export default function ProspectingAgentView() {
+  const { actions } = useProduction();
   const [isRunning, setIsRunning] = useState(false);
   const [leads, setLeads] = useState<Lead[]>([
     {
@@ -52,7 +55,14 @@ export default function ProspectingAgentView() {
   ]);
 
   const toggleAgent = () => {
-    setIsRunning(!isRunning);
+    const next = !isRunning;
+    setIsRunning(next);
+    actions.logEvent(next ? "outreach_sent" : "onboarded", {
+      source: "simulated-agent",
+      detail: next
+        ? "Simulated agent activated on the sample pipeline"
+        : "Simulated agent stopped",
+    });
   };
 
   const statusColors = {
@@ -70,8 +80,12 @@ export default function ProspectingAgentView() {
           <div className="eyebrow">Autonomous Agent</div>
           <h1 className="view-title">Prospecting Engine.</h1>
           <p className="text-[var(--muted)] max-w-2xl">
-            Our agentic agent identifies ultra-high-net-worth listing agents, qualifies their brand alignment, 
-            and initiates personalized outreach.
+            The intended shape of the engine: identify listing agents with the right
+            brand alignment, qualify them, then open outreach from the pitch pack.
+          </p>
+          <p className="text-[11px] text-[var(--brass)] max-w-2xl">
+            Sample pipeline — the leads, scores and activity below are illustrative
+            placeholders, not live data. No prospecting source is connected yet.
           </p>
         </div>
         <button

@@ -21,10 +21,14 @@ import type {
   AssetItem,
   AspectRatio,
   BrandKit,
+  MarketingEvent,
+  MarketingEventType,
+  MarketingSource,
   Production,
   PropertyDetails,
   Scene,
 } from "./types";
+import { MAX_MARKETING_EVENTS } from "./marketing";
 import { STARTING_CREDITS } from "./pricing";
 import { composeFinalCut, makeFrame } from "./frames";
 import { generateCaption, generateListingSheet } from "./captions";
@@ -64,6 +68,10 @@ export interface ProductionActions {
   greenlightAll(): Promise<void>;
   generateExtras(): void;
   downloadAsset(asset: AssetItem): void;
+  /** Record a funnel event in the local marketing ledger. */
+  logEvent(type: MarketingEventType, opts?: { source?: MarketingSource; detail?: string }): void;
+  /** Wipe the local marketing ledger. */
+  clearEvents(): void;
   reset(): void;
   remainingCredits(): number;
 }
@@ -187,6 +195,30 @@ export function ProductionProvider({ children }: { children: React.ReactNode }) 
         ...p,
         brand: { ...(p.brand || ({} as BrandKit)), ...brand },
       })),
+    [update]
+  );
+
+  const logEvent = useCallback(
+    (type: MarketingEventType, opts?: { source?: MarketingSource; detail?: string }) => {
+      const event: MarketingEvent = {
+        id: `evt_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`,
+        type,
+        at: Date.now(),
+        source: opts?.source ?? "operator",
+        detail: opts?.detail,
+      };
+      update((p) => ({
+        ...p,
+        marketing: {
+          events: [event, ...(p.marketing?.events ?? [])].slice(0, MAX_MARKETING_EVENTS),
+        },
+      }));
+    },
+    [update]
+  );
+
+  const clearEvents = useCallback(
+    () => update((p) => ({ ...p, marketing: { events: [] } })),
     [update]
   );
 
@@ -536,6 +568,8 @@ export function ProductionProvider({ children }: { children: React.ReactNode }) 
     },
     generateExtras,
     downloadAsset,
+    logEvent,
+    clearEvents,
     reset,
     remainingCredits,
   };
