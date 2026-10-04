@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-page-custom-font */
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -22,7 +23,11 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <ProductionProvider>{children}</ProductionProvider>
+      </body>
     </html>
   );
 }
+
+import { ProductionProvider } from "@/lib/store";

@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": [
+    "../../next-env.d.ts",
+    "../../lib/types.ts",
+    "../../lib/pricing.ts",
+    "../../lib/api.ts",
+    "../../lib/scrape.ts",
+    "../../lib/jobs.ts",
+    "../../lib/frames.ts",
+    "../../app/api/**/*.ts"
+  ]
+}

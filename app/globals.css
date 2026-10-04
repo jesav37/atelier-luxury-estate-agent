@@ -95,3 +95,97 @@ a {
 .ghost-btn:hover {
   border-color: var(--brass);
 }
+
+/* Subtle progress bar used by storyboard cards. */
+.progress-track {
+  position: relative;
+  height: 4px;
+  background: var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--brass) 0%, var(--brass2) 100%);
+  border-radius: 999px;
+  transform-origin: left center;
+  transition: transform 0.4s ease;
+}
+.progress-fill.indeterminate {
+  width: 35%;
+  animation: progress-slide 1.6s ease-in-out infinite;
+}
+@keyframes progress-slide {
+  0% { transform: translateX(-110%); }
+  100% { transform: translateX(360%); }
+}
+
+/* Hairline divider used between view sections. */
+.hairline {
+  height: 1px;
+  background: var(--line);
+  width: 100%;
+}
+
+/* Small uppercase "tag" used for status & meta. */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  background: rgba(245, 242, 236, 0.02);
+  white-space: nowrap;
+}
+.tag.brass {
+  color: var(--brass);
+  border-color: rgba(184, 155, 114, 0.45);
+  background: rgba(184, 155, 114, 0.08);
+}
+.tag.error {
+  color: #e7c0b3;
+  border-color: rgba(168, 84, 58, 0.45);
+  background: rgba(168, 84, 58, 0.10);
+}
+
+/* Status dot used in sidebar, list rows, etc. */
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--muted);
+  flex-shrink: 0;
+}
+.status-dot.brass { background: var(--brass); box-shadow: 0 0 12px var(--brass); }
+.status-dot.bone { background: var(--bone); }
+.status-dot.error { background: #c97b65; box-shadow: 0 0 10px rgba(201, 123, 101, 0.6); }
+.status-dot.pulse { animation: dot-pulse 1.4s ease-in-out infinite; }
+@keyframes dot-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* Card surface used by sidebar, plan, etc. */
+.surface {
+  background: var(--ink2);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+/* Tiny dot for bullet lists. */
+.list-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--brass);
+  display: inline-block;
+  flex-shrink: 0;
+}

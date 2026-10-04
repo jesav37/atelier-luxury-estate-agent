@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import type { ScrapeResponse } from "@/lib/api";
-import { readListing } from "@/lib/scrape";
+import type { BrandResponse } from "@/lib/api";
+import { readBrand } from "@/lib/scrape";
 
 export const dynamic = "force-dynamic";
 
@@ -10,22 +10,22 @@ export async function POST(req: NextRequest) {
   const url = typeof body?.url === "string" ? body.url.trim() : "";
 
   if (!url) {
-    const payload: ScrapeResponse = { success: false, error: "A listing URL is required." };
+    const payload: BrandResponse = { success: false, error: "A brand URL is required." };
     return NextResponse.json(payload, { status: 400 });
   }
   if (!isHttpUrl(url)) {
-    const payload: ScrapeResponse = { success: false, error: "Enter a valid http(s) listing URL." };
+    const payload: BrandResponse = { success: false, error: "Enter a valid http(s) brand URL." };
     return NextResponse.json(payload, { status: 400 });
   }
 
   try {
-    const details = await readListing(url);
-    const payload: ScrapeResponse = { success: true, details };
+    const brand = await readBrand(url);
+    const payload: BrandResponse = { success: true, brand };
     return NextResponse.json(payload);
   } catch (err) {
-    const payload: ScrapeResponse = {
+    const payload: BrandResponse = {
       success: false,
-      error: `Could not read that listing: ${err instanceof Error ? err.message : "unknown error"}`,
+      error: `Could not read that brand site: ${err instanceof Error ? err.message : "unknown error"}`,
     };
     return NextResponse.json(payload, { status: 500 });
   }

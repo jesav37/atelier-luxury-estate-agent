@@ -1,0 +1,25 @@
+{
+  "kind": "cut",
+  "property": "Palm Crest Villa",
+  "aspectRatio": "9:16",
+  "sceneCount": 2,
+  "generatedAt": "2026-10-03T19:45:36.921Z",
+  "sequences": [
+    {
+      "scene": 1,
+      "name": "Golden Hour Exterior",
+      "time": "00:00",
+      "duration": 8,
+      "credits": 5,
+      "source": "atelier-scene-01.svg"
+    },
+    {
+      "scene": 2,
+      "name": "Interior Reveal",
+      "time": "00:08",
+      "duration": 8,
+      "credits": 5,
+      "source": "atelier-scene-02.svg"
+    }
+  ]
+}
