@@ -41,7 +41,7 @@ export default function AssetLibraryView() {
               {asset.type === "video" && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="h-12 w-12 rounded-full bg-[var(--brass)]/90 flex items-center justify-center text-[var(--ink)] shadow-xl scale-90 group-hover:scale-100 transition-transform">
-                    <PlayIcon size={20} fill="currentColor" />
+                    <PlayIcon size={20} />
                   </div>
                 </div>
               )}
