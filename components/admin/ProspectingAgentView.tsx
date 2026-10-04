@@ -89,7 +89,7 @@ export default function ProspectingAgentView() {
             </>
           ) : (
             <>
-              <PlayIcon size={16} fill="currentColor" />
+              <PlayIcon size={16} />
               Activate Agent
             </>
           )}
