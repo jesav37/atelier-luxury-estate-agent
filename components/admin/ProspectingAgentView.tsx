@@ -167,14 +167,14 @@ export default function ProspectingAgentView() {
           <MailIcon size={20} className="text-[var(--brass)]" />
           <h3 className="text-[15px] font-medium">Outreach Persona</h3>
           <p className="text-[12px] text-[var(--muted)]">
-            "Editorial Concierge" — Tone is professional, observant, and respectful of high-value time.
+            &quot;Editorial Concierge&quot; — Tone is professional, observant, and respectful of high-value time.
           </p>
         </div>
         <div className="p-6 rounded-2xl border border-[var(--line)] bg-[rgba(184,155,114,0.02)] space-y-4">
           <CalendarIcon size={20} className="text-[var(--brass)]" />
           <h3 className="text-[15px] font-medium">Engagement Goal</h3>
           <p className="text-[12px] text-[var(--muted)]">
-            Schedule 15-minute "Atelier Overview" with listing coordinator or agent direct.
+            Schedule 15-minute &quot;Atelier Overview&quot; with listing coordinator or agent direct.
           </p>
         </div>
       </div>
