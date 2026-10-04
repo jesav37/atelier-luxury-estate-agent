@@ -11,6 +11,9 @@ import {
   FlowIcon,
   Logo,
   PresentIcon,
+  TrendingUpIcon,
+  ZapIcon,
+  FilmIcon,
 } from "./Icons";
 
 export type ViewKey =
